@@ -1,7 +1,7 @@
 #!/bin/bash
 set -x
 
-if [[ $TRAVIS_OS_NAME != 'linux' ]]; then
+if [[ $TRAVIS_OS_NAME != 'linux' ]] && [[ $RUNNER_OS != 'Linux']]; then
     brew update --verbose
     # brew update > brew-update.log 2>&1
     # fix an issue with libtool on travis by reinstalling it
