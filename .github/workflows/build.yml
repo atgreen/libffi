@@ -30,10 +30,11 @@ jobs:
           platform: x64
           packages: wget gcc dejagnu automake autoconf texinfo
 
-      - shell: ./autogen.sh
-
-      - run: ls.exe -l
-
-      - shell: ./configure
-
-      - run: ls.exe -l
+      - run: |
+          ls -Al
+          pwd
+          ./autogen.sh
+          ls -l
+          ./configure
+          ls -l
+        shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
