@@ -33,7 +33,7 @@ jobs:
       - run: |
           set -x
           cd $(cygpath $RUNNER_WORKSPACE)/libffi
-          ./autogen.sh
+          autoreconf -v -i
           ls -l
           ./configure
           ls -l
