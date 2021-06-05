@@ -31,6 +31,7 @@ jobs:
           packages: wget gcc dejagnu automake autoconf texinfo
 
       - run: |
+          cd $(cygpath $RUNNER_WORKSPACE)
           ls -Al
           pwd
           env
