@@ -14,45 +14,22 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
-    name: Build and test on ${{ matrix.distro }} ${{ matrix.arch }}
-    runs-on: ubuntu-latest
+    name: Build and test libffi
 
-    # Run steps on a matrix of 3 arch/distro combinations
     strategy:
       matrix:
-        include:
-          - arch: aarch64
-            distro: fedora_latest
-          - arch: ppc64le
-            distro: fedora_latest
-          - arch: s390x
-            distro: fedora_latest
+        platform: [windows-latest]
 
     steps:
       - uses: actions/checkout@v2
 
-      - uses: uraimo/run-on-arch-action@v2.0.5
-        name: Build
+      - name: Set up Cygwin
+        uses: egor-tensin/setup-cygwin@v3
         with:
-          arch: ${{ matrix.arch }}
-          distro: ${{ matrix.distro }}
-          githubToken: ${{ github.token }}
+          platform: x64
+          packages: wget gcc dejagnu automake autoconf texinfo
 
-          install: |
-            case "${{ matrix.distro }}" in
-              ubuntu*|jessie|stretch|buster|bullseye)
-                apt-get update -q -y
-                apt-get install -q -y wget gcc dejagnu automake autoconf texinfo
-                ;;
-              fedora*)
-                dnf -y update
-                dnf -y install wget gcc dejagnu automake autoconf texinfo
-                ;;
-              alpine*)
-                apk update
-                apk add wget gcc dejagnu automake autoconf texinfo
-                ;;
-            esac
-          run: |
-            HOST=${{ matrix.arch }}-linux-gnu OS_NAME=linux ./.travis/install.sh
-            HOST=${{ matrix.arch }}-linux-gnu OS_NAME=linux ./.travis/build.sh
+      - run: |
+          ./autogen.sh
+          ./configure
+          make
