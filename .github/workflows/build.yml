@@ -36,6 +36,21 @@ jobs:
         with:
           arch: ${{ matrix.arch }}
           distro: ${{ matrix.distro }}
+          install: |
+            case "${{ matrix.distro }}" in
+              ubuntu*|jessie|stretch|buster|bullseye)
+                apt-get update -q -y
+                apt-get install -q -y wget gcc dejagnu automake autoconf texinfo
+                ;;
+              fedora*)
+                dnf -y update
+                dnf -y install wget gcc dejagnu automake autoconf texinfo
+                ;;
+              alpine*)
+                apk update
+                apk add wget gcc dejagnu automake autoconf texinfo
+                ;;
+            esac
           run: |
             HOST=${{ matrix.arch }}-linux-gnu OS_NAME=linux ./.travis/install.sh
             HOST=${{ matrix.arch }}-linux-gnu OS_NAME=linux ./.travis/build.sh
