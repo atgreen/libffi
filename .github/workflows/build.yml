@@ -14,19 +14,26 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
-    name: Build and test
+    name: Build and test on ${{ matrix.distro }} ${{ matrix.arch }}
     runs-on: ubuntu-latest
-    steps:
+
+    # Run steps on a matrix of 3 arch/distro combinations
+    strategy:
+      matrix:
+        include:
+          - arch: aarch64
+            distro: fedora_latest
+          - arch: ppc64le
+            distro: fedora_latest
+          - arch: s390x
+            distro: fedora_latest
+
+  steps:
     - uses: actions/checkout@v2
-    - run: |
-        git fetch --prune --unshallow --tags
-        echo exit code $?
-
-    - name: Dump environment
-      run: env
-
-    - name: Install prerequisites
-      run: OS_NAME=linux ./.travis/install.sh
-
-    - name: Build and test
-      run: OS_NAME=linux ./.travis/build.sh
+    - uses: uraimo/run-on-arch-action@v2.0.5
+      name: Build
+      with:
+        arch: ${{ matrix.arch }}
+        distro: ${{ matrix.distro }}
+        run: HOST=${{ matrix.arch }}-linux-gnu OS_NAME=linux ./.travis/install.sh
+        run: HOST=${{ matrix.arch }}-linux-gnu OS_NAME=linux ./.travis/build.sh
