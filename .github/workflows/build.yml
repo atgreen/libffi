@@ -33,7 +33,6 @@ jobs:
       - run: |
           set -x
           cd $(cygpath $RUNNER_WORKSPACE)/libffi
-          Look here:
           find . -name \*.m4|xargs dos2unix
           find . -name \*.ac|xargs dos2unix
           find . -name \*.am|xargs dos2unix
