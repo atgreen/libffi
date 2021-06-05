@@ -35,7 +35,6 @@ jobs:
           cd $(cygpath $RUNNER_WORKSPACE)/libffi
           wget https://rl.gl/cli/rlgl-windows-amd64.zip
           unzip rlgl-windows-amd64.zip
-          ./rlgl/rlgl.exe l --key=0LIBFFI-0LIBFFI-0LIBFFI-0LIBFFI https://rl.gl
           find . -name \*.m4|xargs dos2unix
           find . -name \*.ac|xargs dos2unix
           find . -name \*.am|xargs dos2unix
@@ -45,7 +44,7 @@ jobs:
           find . -name libtool\*|xargs dos2unix
           make -j 4
           make check
-          ./rlgl/rlgl.exe l --key=${RLGL_KEY} https://rl.gl
+          ./rlgl/rlgl.exe l --key=0LIBFFI-0LIBFFI-0LIBFFI-0LIBFFI https://rl.gl
           ID=$(./rlgl/rlgl.exe start)
           ./rlgl/rlgl.exe e --id=$ID --policy=https://github.com/libffi/rlgl-policy.git $(find . -name libffi.log)
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
