@@ -33,8 +33,8 @@ else
 	    ;;
     esac
 
-    sudo apt-get clean # clear the cache
-    sudo apt-get update
+#    sudo apt-get clean # clear the cache
+#    sudo apt-get update
     case $HOST in
 	mips64el-linux-gnu | sparc64-linux-gnu)
         ;;
