@@ -28,13 +28,11 @@ jobs:
         uses: egor-tensin/setup-cygwin@v3
         with:
           platform: x64
-          packages: wget gcc dejagnu automake autoconf texinfo
+          packages: wget gcc-core make dejagnu automake autoconf texinfo
 
       - run: |
+          set -x
           cd $(cygpath $RUNNER_WORKSPACE)/libffi
-          ls -Al
-          pwd
-          env
           ./autogen.sh
           ls -l
           ./configure
