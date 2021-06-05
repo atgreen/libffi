@@ -33,8 +33,7 @@ jobs:
       - run: |
           set -x
           cd $(cygpath $RUNNER_WORKSPACE)/libffi
-          autoreconf -v -i
-          ls -l
+          autoreconf -f -v -i
           ./configure
           ls -l
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
