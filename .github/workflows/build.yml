@@ -36,6 +36,7 @@ jobs:
           find . -name \*.m4|xargs dos2unix
           find . -name \*.ac|xargs dos2unix
           find . -name \*.am|xargs dos2unix
+          find . -name \*.host|xargs dos2unix
           autoreconf -f -v -i
           ./configure
           ls -l
