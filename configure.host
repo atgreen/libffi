@@ -3,8 +3,6 @@
 # This shell script handles all host based configuration for libffi.
 #
 
-set -x
-
 # THIS TABLE IS SORTED.  KEEP IT THAT WAY.
 # Most of the time we can define all the variables all at once...
 case "${host}" in

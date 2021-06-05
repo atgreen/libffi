@@ -39,5 +39,6 @@ jobs:
           find . -name \*.host|xargs dos2unix
           autoreconf -f -v -i
           ./configure
+          make
           ls -l
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
