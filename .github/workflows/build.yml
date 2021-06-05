@@ -28,7 +28,7 @@ jobs:
         uses: egor-tensin/setup-cygwin@v3
         with:
           platform: x64
-          packages: wget gcc-core make dejagnu automake autoconf libtool texinfo
+          packages: wget gcc-core make dejagnu automake autoconf libtool texinfo dos2unix
 
       - run: |
           set -x
