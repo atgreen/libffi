@@ -30,7 +30,10 @@ jobs:
           platform: x64
           packages: wget gcc dejagnu automake autoconf texinfo
 
-      - run: |
-          ./autogen.sh
-          ./configure
-          make
+      - shell: ./autogen.sh
+
+      - run: ls.exe -l
+
+      - shell: ./configure
+
+      - run: ls.exe -l
