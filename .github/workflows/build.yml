@@ -28,15 +28,14 @@ jobs:
           - arch: s390x
             distro: fedora_latest
 
-  steps:
+    steps:
+      - uses: actions/checkout@v2
 
-    - uses: actions/checkout@v2.1.0
-
-    - uses: uraimo/run-on-arch-action@v2.0.5
-      name: Build
-      with:
-        arch: ${{ matrix.arch }}
-        distro: ${{ matrix.distro }}
-        run: |
-          HOST=${{ matrix.arch }}-linux-gnu OS_NAME=linux ./.travis/install.sh
-          HOST=${{ matrix.arch }}-linux-gnu OS_NAME=linux ./.travis/build.sh
+      - uses: uraimo/run-on-arch-action@v2.0.5
+        name: Build
+        with:
+          arch: ${{ matrix.arch }}
+          distro: ${{ matrix.distro }}
+          run: |
+            HOST=${{ matrix.arch }}-linux-gnu OS_NAME=linux ./.travis/install.sh
+            HOST=${{ matrix.arch }}-linux-gnu OS_NAME=linux ./.travis/build.sh
