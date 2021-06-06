@@ -49,7 +49,7 @@ jobs:
           ./rlgl/rlgl.exe e --id=$ID --policy=https://github.com/libffi/rlgl-policy.git $(find . -name libffi.log)
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
 
-  build:
+  build-msvc:
     name: Build and test libffi with Visual C++
     runs-on: windows-latest
 
