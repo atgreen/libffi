@@ -69,6 +69,7 @@ jobs:
       - name: Build and test
         run: |
           echo "===================================================="
+          dos2unix $(cygpath $RUNNER_WORKSPACE)/libffi/.travis/msvs-detect
           $(cygpath $RUNNER_WORKSPACE)/libffi/.travis/msvs-detect --arch=x64 --with-assembler
           echo "===================================================="
           find "/cygdrive/c/Program Files (x86)/Microsoft Visual Studio" -name \*.exe
