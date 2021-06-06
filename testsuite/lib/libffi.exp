@@ -270,6 +270,7 @@ proc libffi-dg-prune { target_triplet text } {
     # We get this with some qemu emulated systems (eg. ppc64le-linux-gnu)
     regsub -all "(^|\n)\[^\n\]*unable to perform all requested operations" $text "" text
     # MSVC executables sometime emit this garbage to the console
+    verbose "prune >> $text <<"
     regsub -all {.[][]6n} $text ""
     return $text
 }
