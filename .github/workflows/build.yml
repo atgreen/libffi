@@ -13,8 +13,9 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+
   build:
-    name: Build and test libffi
+    name: Build and test libffi on cygwin
     runs-on: windows-latest
 
     strategy:
@@ -31,7 +32,6 @@ jobs:
           packages: wget gcc-core make dejagnu automake autoconf libtool texinfo dos2unix unzip
 
       - run: |
-          set -x
           cd $(cygpath $RUNNER_WORKSPACE)/libffi
           wget https://rl.gl/cli/rlgl-windows-amd64.zip
           unzip rlgl-windows-amd64.zip
@@ -48,3 +48,22 @@ jobs:
           ID=$(./rlgl/rlgl.exe start)
           ./rlgl/rlgl.exe e --id=$ID --policy=https://github.com/libffi/rlgl-policy.git $(find . -name libffi.log)
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
+
+  build:
+    name: Build and test libffi with Visual C++
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        platform: [windows-latest]
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: microsoft/setup-msbuild@v1.0.2
+
+      - name: Build and test
+        run: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
+          C:\tools\cygwin\bin\bash.exe -lc "(cd $(cygpath $RUNNER_WORKSPACE)/libffi; ./autogen.sh)"
+          C:\tools\cygwin\bin\bash.exe -lc "(cd $(cygpath $RUNNER_WORKSPACE)/libffi; ./configure CC='%MSVCC%' CXX='%MSVCC%' LD='link' CPP='cl -nologo -EP' CXXCPP='cl -nologo -EP' CPPFLAGS='-DFFI_BUILDING_DLL' AR='$(cygpath $RUNNER_WORKSPACE)/libffi/.travis/ar-lib lib' NM='dumpbin -symbols' STRIP=':' --build=$BUILD --host=$HOST $DEBUG_ARG $SHARED_ARG)"
+        shell: cmd
