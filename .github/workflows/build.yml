@@ -62,7 +62,7 @@ jobs:
       - uses: egor-tensin/setup-cygwin@v3
         with:
           platform: x64
-          packages: wget make dejagnu automake autoconf libtool texinfo unzip
+          packages: wget make dejagnu automake autoconf libtool texinfo unzip dos2unix
       - uses: ilammy/msvc-dev-cmd@v1.8.1
       - uses: microsoft/setup-msbuild@v1.0.2
 
