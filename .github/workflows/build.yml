@@ -59,6 +59,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - uses: ilammy/msvc-dev-cmd@v1.8.1
       - uses: microsoft/setup-msbuild@v1.0.2
 
       - name: Build and test
