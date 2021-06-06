@@ -64,7 +64,6 @@ jobs:
 
       - name: Build and test
         run: |
-          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
           C:\tools\cygwin\bin\bash.exe -lc "(cd $(cygpath $RUNNER_WORKSPACE)/libffi; ./autogen.sh)"
           C:\tools\cygwin\bin\bash.exe -lc "(cd $(cygpath $RUNNER_WORKSPACE)/libffi; ./configure CC='$(cygpath $RUNNER_WORKSPACE)/libffi/msvcc.sh)' CXX='$(cygpath $RUNNER_WORKSPACE)/libffi/msvcc.sh)' LD='link' CPP='cl -nologo -EP' CXXCPP='cl -nologo -EP' CPPFLAGS='-DFFI_BUILDING_DLL' AR='$(cygpath $RUNNER_WORKSPACE)/libffi/.travis/ar-lib lib' NM='dumpbin -symbols' STRIP=':' --build=$BUILD --host=$HOST $DEBUG_ARG $SHARED_ARG)"
         shell: cmd
