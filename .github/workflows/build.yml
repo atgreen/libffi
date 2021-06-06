@@ -80,5 +80,6 @@ jobs:
           autoreconf -f -v -i
           ./configure CC=$(pwd)/msvcc.sh CXX=$(pwd)/msvcc.sh LD='link' CPP='cl -nologo -EP' CXXCPP='cl -nologo -EP' CPPFLAGS='-DFFI_BUILDING_DLL' AR='$(pwd)/.travis/ar-lib lib' NM='dumpbin -symbols' STRIP=':' --build=$BUILD --host=$HOST $DEBUG_ARG $SHARED_ARG || cat */config.log
           find . -name libtool\*|xargs dos2unix
+          env
           make
         shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
