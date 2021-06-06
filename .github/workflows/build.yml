@@ -68,15 +68,16 @@ jobs:
 
       - name: Build and test
         run: |
-          C:\tools\cygwin\bin\bash.exe -lc "(cd $(cygpath $RUNNER_WORKSPACE)/libffi; wget https://rl.gl/cli/rlgl-windows-amd64.zip)"
-          C:\tools\cygwin\bin\bash.exe -lc "(cd $(cygpath $RUNNER_WORKSPACE)/libffi; unzip rlgl-windows-amd64.zip)"
-          C:\tools\cygwin\bin\bash.exe -lc "(cd $(cygpath $RUNNER_WORKSPACE)/libffi; find . -name \*.m4|xargs dos2unix)"
-          C:\tools\cygwin\bin\bash.exe -lc "(cd $(cygpath $RUNNER_WORKSPACE)/libffi; find . -name \*.ac|xargs dos2unix)"
-          C:\tools\cygwin\bin\bash.exe -lc "(cd $(cygpath $RUNNER_WORKSPACE)/libffi; find . -name \*.am|xargs dos2unix)"
-          C:\tools\cygwin\bin\bash.exe -lc "(cd $(cygpath $RUNNER_WORKSPACE)/libffi; find . -name \*.host|xargs dos2unix)"
-          C:\tools\cygwin\bin\bash.exe -lc "(cd $(cygpath $RUNNER_WORKSPACE)/libffi; autoreconf -f -v -i)"
-          C:\tools\cygwin\bin\bash.exe -lc "(cd $(cygpath $RUNNER_WORKSPACE)/libffi; ./configure CC=$(pwd)/msvcc.sh CXX=$(pwd)/msvcc.sh LD='link' CPP='cl -nologo -EP' CXXCPP='cl -nologo -EP' CPPFLAGS='-DFFI_BUILDING_DLL' AR=$(pwd)/.travis/ar-lib lib' NM='dumpbin -symbols' STRIP=':' --build=$BUILD --host=$HOST $DEBUG_ARG $SHARED_ARG)"
-          C:\tools\cygwin\bin\bash.exe -lc "(cd $(cygpath $RUNNER_WORKSPACE)/libffi; cat */config.log)"
-          C:\tools\cygwin\bin\bash.exe -lc "(cd $(cygpath $RUNNER_WORKSPACE)/libffi; find . -name libtool\*|xargs dos2unix)"
-          C:\tools\cygwin\bin\bash.exe -lc "(cd $(cygpath $RUNNER_WORKSPACE)/libffi; make)"
-        shell: cmd
+          cd $(cygpath $RUNNER_WORKSPACE)/libffi
+          wget https://rl.gl/cli/rlgl-windows-amd64.zip
+          unzip rlgl-windows-amd64.zip
+          find . -name \*.m4|xargs dos2unix
+          find . -name \*.ac|xargs dos2unix
+          find . -name \*.am|xargs dos2unix
+          find . -name \*.host|xargs dos2unix
+          autoreconf -f -v -i
+          ./configure CC=$(pwd)/msvcc.sh CXX=$(pwd)/msvcc.sh LD='link' CPP='cl -nologo -EP' CXXCPP='cl -nologo -EP' CPPFLAGS='-DFFI_BUILDING_DLL' AR='$(pwd)/.travis/ar-lib lib' NM='dumpbin -symbols' STRIP=':' --build=$BUILD --host=$HOST $DEBUG_ARG $SHARED_ARG
+          cat */config.log
+          find . -name libtool\*|xargs dos2unix
+          make
+        shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}'
