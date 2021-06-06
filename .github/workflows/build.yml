@@ -73,7 +73,7 @@ jobs:
           $(cygpath $RUNNER_WORKSPACE)/libffi/.travis/msvs-detect --arch=x64 --with-assembler
           echo "===================================================="
           find "/cygdrive/c/Program Files (x86)/Microsoft Visual Studio" -name \*.exe
-          export PATH=$PATH:"/cygdrive/c/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Tools/MSVC/14.16.27023/bin/HostX64/x86"
+          export PATH=$PATH:"/cygdrive/c/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Tools/MSVC/14.16.27023/bin/HostX64/x64"
           cd $(cygpath $RUNNER_WORKSPACE)/libffi
           wget https://rl.gl/cli/rlgl-windows-amd64.zip
           unzip rlgl-windows-amd64.zip
@@ -84,7 +84,7 @@ jobs:
           find . -name \*.host|xargs dos2unix
           dos2unix .travis/ar-lib
           autoreconf -f -v -i
-          ./configure CC=$(pwd)/msvcc.sh CXX=$(pwd)/msvcc.sh LD='link' CPP='cl -nologo -EP' CXXCPP='cl -nologo -EP' CPPFLAGS='-DFFI_BUILDING_DLL' AR='$(pwd)/.travis/ar-lib lib' NM='dumpbin -symbols' STRIP=':' --build=$BUILD --host=$HOST $DEBUG_ARG $SHARED_ARG || cat */config.log
+          ./configure CC="$(pwd)/msvcc.sh -m64" CXX="$(pwd)/msvcc.sh -m64" LD='link' CPP='cl -nologo -EP' CXXCPP='cl -nologo -EP' CPPFLAGS='-DFFI_BUILDING_DLL' AR='$(pwd)/.travis/ar-lib lib' NM='dumpbin -symbols' STRIP=':' --build=$BUILD --host=$HOST $DEBUG_ARG $SHARED_ARG || cat */config.log
           find . -name libtool\*|xargs dos2unix
           env
           make
