@@ -75,7 +75,7 @@ jobs:
           C:\tools\cygwin\bin\bash.exe -lc "(cd $(cygpath $RUNNER_WORKSPACE)/libffi; find . -name \*.am|xargs dos2unix)"
           C:\tools\cygwin\bin\bash.exe -lc "(cd $(cygpath $RUNNER_WORKSPACE)/libffi; find . -name \*.host|xargs dos2unix)"
           C:\tools\cygwin\bin\bash.exe -lc "(cd $(cygpath $RUNNER_WORKSPACE)/libffi; autoreconf -f -v -i)"
-          C:\tools\cygwin\bin\bash.exe -lc "(cd $(cygpath $RUNNER_WORKSPACE)/libffi; ./configure CC=$(pwd)/msvcc.sh CXX=$(pwd)/msvcc.sh' LD='link' CPP='cl -nologo -EP' CXXCPP='cl -nologo -EP' CPPFLAGS='-DFFI_BUILDING_DLL' AR=$(pwd)/.travis/ar-lib lib' NM='dumpbin -symbols' STRIP=':' --build=$BUILD --host=$HOST $DEBUG_ARG $SHARED_ARG)"
+          C:\tools\cygwin\bin\bash.exe -lc "(cd $(cygpath $RUNNER_WORKSPACE)/libffi; ./configure CC=$(pwd)/msvcc.sh CXX=$(pwd)/msvcc.sh LD='link' CPP='cl -nologo -EP' CXXCPP='cl -nologo -EP' CPPFLAGS='-DFFI_BUILDING_DLL' AR=$(pwd)/.travis/ar-lib lib' NM='dumpbin -symbols' STRIP=':' --build=$BUILD --host=$HOST $DEBUG_ARG $SHARED_ARG)"
           C:\tools\cygwin\bin\bash.exe -lc "(cd $(cygpath $RUNNER_WORKSPACE)/libffi; cat */config.log)"
           C:\tools\cygwin\bin\bash.exe -lc "(cd $(cygpath $RUNNER_WORKSPACE)/libffi; find . -name libtool\*|xargs dos2unix)"
           C:\tools\cygwin\bin\bash.exe -lc "(cd $(cygpath $RUNNER_WORKSPACE)/libffi; make)"
