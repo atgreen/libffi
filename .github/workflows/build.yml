@@ -71,10 +71,12 @@ jobs:
           cd $(cygpath $RUNNER_WORKSPACE)/libffi
           wget https://rl.gl/cli/rlgl-windows-amd64.zip
           unzip rlgl-windows-amd64.zip
+          find . -name \*.sh|xargs dos2unix
           find . -name \*.m4|xargs dos2unix
           find . -name \*.ac|xargs dos2unix
           find . -name \*.am|xargs dos2unix
           find . -name \*.host|xargs dos2unix
+          dos2unix .travis/ar-lib
           autoreconf -f -v -i
           ./configure CC=$(pwd)/msvcc.sh CXX=$(pwd)/msvcc.sh LD='link' CPP='cl -nologo -EP' CXXCPP='cl -nologo -EP' CPPFLAGS='-DFFI_BUILDING_DLL' AR='$(pwd)/.travis/ar-lib lib' NM='dumpbin -symbols' STRIP=':' --build=$BUILD --host=$HOST $DEBUG_ARG $SHARED_ARG || cat */config.log
           find . -name libtool\*|xargs dos2unix
