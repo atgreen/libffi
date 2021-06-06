@@ -68,6 +68,7 @@ jobs:
 
       - name: Build and test
         run: |
+          find "/cygdrive/c/Program Files (x86)/Microsoft Visual Studio"
           cd $(cygpath $RUNNER_WORKSPACE)/libffi
           wget https://rl.gl/cli/rlgl-windows-amd64.zip
           unzip rlgl-windows-amd64.zip
