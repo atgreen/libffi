@@ -68,6 +68,7 @@ jobs:
 
       - name: Build and test
         run: |
+          set -x
           echo "===================================================="
           dos2unix $(cygpath $RUNNER_WORKSPACE)/libffi/.travis/msvs-detect
           $(cygpath $RUNNER_WORKSPACE)/libffi/.travis/msvs-detect --arch=x64 --with-assembler
