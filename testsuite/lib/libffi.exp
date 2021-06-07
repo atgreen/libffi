@@ -271,8 +271,11 @@ proc libffi-dg-prune { target_triplet text } {
     regsub -all "(^|\n)\[^\n\]*unable to perform all requested operations" $text "" text
     # MSVC executables sometime emit this garbage to the console
     verbose "prune before >> $text <<"
-    regsub -all {.[][]6n} $text ""
-    verbose "prune after  >> $text <<"
+    verbose [ string length $text ]
+    if { string equal {[6n} [ string range $text 1 3 ] } {
+        verbose "trimmed"
+        return ""
+    }
     return $text
 }
 
