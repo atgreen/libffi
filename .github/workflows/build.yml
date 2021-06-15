@@ -43,7 +43,7 @@ jobs:
           ./configure
           find . -name libtool\*|xargs dos2unix
           make -j 4
-          make check || true
+          TERM=none make check || true
           ./rlgl/rlgl.exe l --key=0LIBFFI-0LIBFFI-0LIBFFI-0LIBFFI https://rl.gl
           ID=$(./rlgl/rlgl.exe start)
           ./rlgl/rlgl.exe e --id=$ID --policy=https://github.com/libffi/rlgl-policy.git $(find . -name libffi.log)
