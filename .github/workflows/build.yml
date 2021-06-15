@@ -42,7 +42,7 @@ jobs:
           autoreconf -f -v -i
           ./configure
           find . -name libtool\*|xargs dos2unix
-          TERM=none make -j 4
+          make -j 4
           TERM=none make check || true
           ./rlgl/rlgl.exe l --key=0LIBFFI-0LIBFFI-0LIBFFI-0LIBFFI https://rl.gl
           ID=$(./rlgl/rlgl.exe start)
@@ -90,7 +90,7 @@ jobs:
           env
           make
           cp $(find . -name 'libffi-?.dll') x86_64-pc-cygwin/testsuite/
-          make check RUNTESTFLAGS="-v -v -v -v" || true
+          TERM=none make check RUNTESTFLAGS="-v" || true
           ./rlgl/rlgl.exe l --key=0LIBFFI-0LIBFFI-0LIBFFI-0LIBFFI https://rl.gl
           ID=$(./rlgl/rlgl.exe start)
           ./rlgl/rlgl.exe e --id=$ID --policy=https://github.com/libffi/rlgl-policy.git $(find . -name libffi.log)
