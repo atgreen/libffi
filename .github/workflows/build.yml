@@ -43,7 +43,11 @@ jobs:
           RUNTESTFLAGS: ${{ matrix.RUNTESTFLAGS }}
           DEJAGNU: ${{ matrix.DEJAGNU }}
         run: |
+          set -x
           if test x"$MEVAL" != x; then eval ${MEVAL}; fi
+          echo $HOST
+          echo $MEVAL
+          env
           pwd
           ./.travis/install.sh
           ./.travis/build.sh
