@@ -28,6 +28,7 @@ jobs:
            RUNTESTFLAGS: "--target_board or1k-sim"
            DEJAGNU: "/opt/.travis/site.exp"
          - MEVAL: "export PATH=/opt/moxielogic/bin:$PATH && CC=moxie-elf-gcc && CXX=moxie-elf-g++"
+           HOST: "moxie-elf"
            LDFLAGS: "-Tsim.ld"
            DEJAGNU: "$RUNNER_WORKSPACE/libffi/.travis/site.exp"
            RUNTESTFLAGS: "--target_board moxie-sim"
