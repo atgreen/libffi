@@ -15,5 +15,6 @@ echo $RUNTESTFLAGS
 echo $DEJAGNU
 ls -l $DEJAGNU
 find ./ -name site.exp
+export DEJAGNU=`pwd`/$DEJAGNU
 runtest --version
 make check RUNTESTFLAGS="-a $RUNTESTFLAGS" || true

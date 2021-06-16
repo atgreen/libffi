@@ -40,6 +40,7 @@ function build_linux()
     ls -l $DEJAGNU
     find ./ -name site.exp
     pwd
+    export DEJAGNU=`pwd`/$DEJAGNU
     runtest --version
     make check RUNTESTFLAGS="-a $RUNTESTFLAGS"
     find ./ -name site.exp
