@@ -32,11 +32,14 @@ jobs:
            DEJAGNU: "$RUNNER_WORKSPACE/libffi/.travis/site.exp"
            RUNTESTFLAGS: "--target_board moxie-sim"
 
-         - run: |
-            if test x"$MEVAL" != x; then eval ${MEVAL}; fi
-            pwd
-            ./.travis/install.sh
-            ./.travis/build.sh
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: |
+          if test x"$MEVAL" != x; then eval ${MEVAL}; fi
+          pwd
+          ./.travis/install.sh
+          ./.travis/build.sh
 
   build:
     name: Build and test libffi on cygwin
