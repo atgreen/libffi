@@ -41,8 +41,7 @@ jobs:
           LDFLAGS: ${{ matrix.LDFLAGS }}
           RUNTESTFLAGS: ${{ matrix.RUNTESTFLAGS }}
           DEJAGNU: ${{ matrix.DEJAGNU }}
-
-      - run: |
+        run: |
           if test x"$MEVAL" != x; then eval ${MEVAL}; fi
           pwd
           ./.travis/install.sh
