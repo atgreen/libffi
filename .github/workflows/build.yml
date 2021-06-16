@@ -29,10 +29,10 @@ jobs:
            DEJAGNU: "/opt/.travis/site.exp"
          - MEVAL: "export PATH=/opt/moxielogic/bin:$PATH && CC=moxie-elf-gcc && CXX=moxie-elf-g++"
            LDFLAGS: "-Tsim.ld"
-           RUNTESTFLAGS: "--target_board moxie-sim"
            DEJAGNU: "$RUNNER_WORKSPACE/libffi/.travis/site.exp"
+           RUNTESTFLAGS: "--target_board moxie-sim"
 
-      - run: |
+         - run: |
             if test x"$MEVAL" != x; then eval ${MEVAL}; fi
             pwd
             ./.travis/install.sh
