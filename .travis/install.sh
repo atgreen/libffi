@@ -3,7 +3,7 @@ set -x
 
 env
 
-if [[ $OS_NAME != 'linux' ]]; then
+if [[ $RUNNER_OS != 'Linux' ]]; then
     brew update --verbose
     # brew update > brew-update.log 2>&1
     # fix an issue with libtool on travis by reinstalling it
