@@ -14,6 +14,30 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
 
+  build-sim:
+    name: Build and test libffi in containers
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+       include:
+         - HOST: "powerpc-eabisim"
+           RUNTESTFLAGS: "--target_board powerpc-eabisim"
+           DEJAGNU: "/opt/.travis/site.exp"
+         - HOST: "or1k-elf"
+           RUNTESTFLAGS: "--target_board or1k-sim"
+           DEJAGNU: "/opt/.travis/site.exp"
+         - MEVAL: "export PATH=/opt/moxielogic/bin:$PATH && CC=moxie-elf-gcc && CXX=moxie-elf-g++"
+           LDFLAGS: "-Tsim.ld"
+           RUNTESTFLAGS: "--target_board moxie-sim"
+           DEJAGNU: "$RUNNER_WORKSPACE/libffi/.travis/site.exp"
+
+      - run: |
+            if test x"$MEVAL" != x; then eval ${MEVAL}; fi
+            pwd
+            ./.travis/install.sh
+            ./.travis/build.sh
+
   build:
     name: Build and test libffi on cygwin
     runs-on: windows-latest
@@ -90,7 +114,7 @@ jobs:
           env
           make
           cp $(find . -name 'libffi-?.dll') x86_64-pc-cygwin/testsuite/
-          TERM=none make check RUNTESTFLAGS="-v" || true
+          TERM=none make check || true
           ./rlgl/rlgl.exe l --key=0LIBFFI-0LIBFFI-0LIBFFI-0LIBFFI https://rl.gl
           ID=$(./rlgl/rlgl.exe start)
           ./rlgl/rlgl.exe e --id=$ID --policy=https://github.com/libffi/rlgl-policy.git $(find . -name libffi.log)
