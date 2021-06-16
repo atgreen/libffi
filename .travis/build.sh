@@ -35,8 +35,14 @@ function build_linux()
     ./configure ${HOST+--host=$HOST} ${CONFIGURE_OPTIONS} || cat */config.log
     make
     make dist
-    make check RUNTESTFLAGS="-a $RUNTESTFLAGS"
+    echo $RUNTESTFLAGS
+    echo $DEJAGNU
+    ls -l $DEJAGNU
     find ./ -name site.exp
+    pwd
+    runtest --version
+    make check RUNTESTFLAGS="-a $RUNTESTFLAGS"
+g    find ./ -name site.exp
     ./rlgl l --key=${RLGL_KEY} https://rl.gl
     ID=$(./rlgl start)
     ./rlgl e --id=$ID --policy=https://github.com/libffi/rlgl-policy.git */testsuite/libffi.log
