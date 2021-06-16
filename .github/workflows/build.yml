@@ -35,6 +35,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - env:
+          MEVAL: ${{ matrix.MEVAL }}
+          HOST: ${{ matrix.HOST }}
+          LDFLAGS: ${{ matrix.LDFLAGS }}
+          RUNTESTFLAGS: ${{ matrix.RUNTESTFLAGS }}
+          DEJAGNU: ${{ matrix.DEJAGNU }}
+
       - run: |
           if test x"$MEVAL" != x; then eval ${MEVAL}; fi
           pwd
