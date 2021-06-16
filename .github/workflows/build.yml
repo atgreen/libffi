@@ -50,7 +50,6 @@ jobs:
           env
           pwd
           ./.travis/install.sh
-          runtest --version
           ./.travis/build.sh
 
   build:
