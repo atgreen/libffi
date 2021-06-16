@@ -42,7 +42,7 @@ function build_linux()
     pwd
     runtest --version
     make check RUNTESTFLAGS="-a $RUNTESTFLAGS"
-g    find ./ -name site.exp
+    find ./ -name site.exp
     ./rlgl l --key=${RLGL_KEY} https://rl.gl
     ID=$(./rlgl start)
     ./rlgl e --id=$ID --policy=https://github.com/libffi/rlgl-policy.git */testsuite/libffi.log
