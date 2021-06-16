@@ -1,6 +1,8 @@
 #!/bin/bash
 set -x
 
+env
+
 if [[ $OS_NAME != 'linux' ]]; then
     brew update --verbose
     # brew update > brew-update.log 2>&1
