@@ -37,9 +37,9 @@ else
     sudo apt-get update
 
     set -x
-    wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 0 -qO - https://ftpmirror.gnu.org/autoconf/autoconf-2.71.tar.gz | tar -xvzf -
+    wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 0 -qO - https://ftpmirror.gnu.org/autoconf/autoconf-2.72.tar.gz | tar -xvzf -
     mkdir -p ~/i
-    (cd autoconf-2.71; ./configure --prefix=$HOME/i; make; make install)
+    (cd autoconf-2.72; ./configure --prefix=$HOME/i; make; make install)
 
     case $HOST in
 	mips64el-linux-gnu | sparc64-linux-gnu)
