@@ -1,6 +1,6 @@
 dnl Process this with autoconf to create configure
 
-AC_PREREQ([2.72])
+AC_PREREQ([2.71])
 
 AC_INIT([libffi],[3.5.0],[http://github.com/libffi/libffi/issues])
 AC_CONFIG_HEADERS([fficonfig.h])
